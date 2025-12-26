@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohd Sultan Siddiqui | Senior Business Analyst</title>
+    
+    <!-- Google Fonts: Playfair Display (Serif), Lato (Sans), Dancing Script (Handwritten) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FDFBF7;       /* Cream */
+            --sidebar-bg: #F4F1EA;     /* Slightly darker cream for sidebar */
+            --text-main: #4A4A4A;      /* Dark Grey for body text */
+            --heading-color: #2D2D2D;  /* Darker Grey for headings */
+            --accent-color: #8C8C8C;   /* Muted grey for metadata */
+            --highlight: #D4AF37;      /* Gold/Bronze hint for links/buttons */
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+            --font-hand: 'Dancing Script', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* --- READING PROGRESS BAR --- */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: transparent;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--heading-color);
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- LAYOUT --- */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* --- SIDEBAR NAVIGATION --- */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            height: 100vh;
+            position: fixed;
+            padding: 4rem 2.5rem; /* Increased padding for elegance */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            /* Added a subtle shadow for depth */
+            box-shadow: 2px 0 20px rgba(0,0,0,0.02); 
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem; /* Slightly refined size */
+            font-weight: 700;
+            color: var(--heading-color);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            
+            /* Removed Boxed Style for a cleaner look */
+            border: none;
+            padding: 0;
+            display: inline-block;
+            transition: opacity 0.3s ease;
+            
+            /* Added an underline accent instead */
+            border-bottom: 2px solid transparent;
+        }
+
+        .logo:hover {
+            /* Simpler hover effect */
+            background-color: transparent;
+            color: var(--heading-color);
+            transform: none;
+            box-shadow: none;
+            border-bottom-color: var(--heading-color);
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem; /* Increased gap */
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: block;
+        }
+
+        .nav-menu li a:hover {
+            color: var(--heading-color);
+            font-weight: 700;
+            transform: translateX(8px); /* Slide effect */
+        }
+
+        .nav-menu li a::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 0%;
+            top: 50%;
+            left: -15px;
+            transform: translateY(-50%);
+            background-color: var(--heading-color);
+            transition: height 0.3s;
+        }
+
+        .nav-menu li a:hover::before {
+            height: 100%;
+        }
+
+        /* Removed old underline effect in favor of side accent */
+        .nav-menu li a::after {
+            display: none;
+        }
+
+        .sidebar-footer {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: var(--heading-color);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            color: var(--text-main);
+        }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: 280px;
+            padding: 6rem 12%; /* More breathing room */
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 8rem; /* Increased vertical spacing */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            color: var(--heading-color);
+        }
+
+        h1 {
+            font-size: 4rem; /* Larger Title */
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--heading-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-family: var(--font-serif);
+            font-style: italic;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* --- QUOTE BLOCK --- */
+        .quote-block {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        /* Decorative quote mark */
+        .quote-block::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            color: rgba(0,0,0,0.05);
+            line-height: 1;
+        }
+
+        .quote-text {
+            font-family: var(--font-hand);
+            font-size: 2.2rem;
+            color: var(--heading-color);
+            line-height: 1.4;
+        }
+
+        /* --- EXPERIENCE --- */
+        .experience-item {
+            margin-bottom: 4rem;
+            border-left: 1px solid rgba(0,0,0,0.1); /* Thinner line */
+            padding-left: 2rem;
+            transition: all 0.3s;
+        }
+
+        .experience-item:hover {
+            border-left-color: var(--heading-color);
+            padding-left: 2.5rem; /* Slide content slightly */
+        }
+
+        .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .duration {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--accent-color);
+        }
+
+        .experience-list {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .experience-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .experience-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--heading-color);
+        }
+
+        /* --- PROJECTS GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: #fff;
+            padding: 2.5rem;
+            border: 1px solid rgba(0,0,0,0.03); /* Very subtle border */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.0);
+        }
+
+        .project-tags {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 2px; /* Sharper corners for modern look */
+            background: #FAFAFA;
+        }
+
+        /* --- SKILLS --- */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-pill {
+            background-color: var(--sidebar-bg);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--heading-color);
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .skill-pill:hover {
+            background-color: transparent;
+            border-color: var(--heading-color);
+            color: var(--heading-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- EDUCATION --- */
+        .education-item {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+        }
+
+        /* --- CONTACT --- */
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-link {
+            color: var(--heading-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--heading-color);
+            transition: all 0.3s;
+            padding-bottom: 2px;
+        }
+
+        .contact-link:hover {
+            background-color: var(--heading-color);
+            color: #fff;
+            padding: 0 5px;
+            border-bottom-color: transparent;
+        }
+
+        /* --- MOBILE TOGGLE --- */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            background: var(--heading-color);
+            color: #fff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 100%;
+                height: auto;
+                min-height: 100vh; /* Changed to min-height for scrolling */
+                position: fixed;
+                top: 0;
+                left: 0;
+                border-bottom: none;
+                box-shadow: none;
+                padding: 6rem 2rem 2rem;
+                background-color: var(--sidebar-bg);
+                overflow-y: auto; /* Enable scrolling if menu is long */
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 6rem 2rem;
+                margin-top: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div>
+                <!-- Brand Mark Logo -->
+                <a href="#" class="logo">Sultan Siddiqui.</a>
+                
+                <div style="margin-top: 4rem;">
+                    <ul class="nav-menu">
+                        <li><a href="#about" onclick="closeMenu()">About</a></li>
+                        <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+                        <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                        <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                        <li><a href="#education" onclick="closeMenu()">Education</a></li>
+                        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="social-icons">
+                    <a href="mailto:sultansiddiqui123@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammad-sultan-siddiqui-9326a21a8" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="tel:+919214327604" title="Phone"><i class="fas fa-phone-alt"></i></a>
+                </div>
+                <p style="margin-top: 1rem; opacity: 0.6; font-family: var(--font-serif); font-style: italic;">Based in India</p>
+                <p style="margin-top: 0.5rem; font-size: 0.7rem; letter-spacing: 1px; opacity: 0.4;">&copy; 2025</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Hero / About Section -->
+            <section id="about">
+                <span class="subtitle">Senior Business Analyst & Data Strategist</span>
+                <h1>Mohd Sultan Siddiqui</h1>
+                <p style="font-size: 1.3rem; max-width: 800px; margin-top: 2rem; line-height: 1.6;">
+                    I turn information into an unfair advantage. Operating at the sharp edge of Product and Data, I translate complex market signals into high-fidelity strategies. My work doesn't just support decisions; it automates the path to profitability, turning undefined business problems into scalable, revenue-generating engines.
+                </p>
+                <p style="max-width: 800px; font-weight: 300;">
+                   From steering massive digital transformations for US State Governments to engineering 18% profit spikes in the hospitality sector, I focus on absolute ROI. I treat data as a product, building the intelligence layers that cut operational friction by 22% and give leadership the clarity to scale with confidence.
+                </p>
+                
+                <div style="margin-top: 3rem;">
+                    <a href="#contact" style="display: inline-block; padding: 1rem 2.5rem; background-color: var(--heading-color); color: #fff; text-decoration: none; font-family: var(--font-serif); letter-spacing: 1px; transition: opacity 0.3s; margin-right: 1.5rem;">Get in Touch</a>
+                    <a href="#projects" style="display: inline-block; padding: 1rem 2.5rem; border: 1px solid var(--heading-color); color: var(--heading-color); text-decoration: none; font-family: var(--font-serif); letter-spacing: 1px; transition: all 0.3s;">View Work</a>
+                </div>
+            </section>
+
+            <!-- Quote Section -->
+            <div class="quote-block">
+                <p class="quote-text">
+                    "Delivering value through data-driven decision making, dashboards, and automation."
+                </p>
+            </div>
+
+            <!-- Experience Section -->
+            <section id="experience">
+                <h2>Experience</h2>
+                
+                <div class="experience-item">
+                    <div class="role-header">
+                        <h3>Senior Business Analyst</h3>
+                        <span class="duration">Oct 2023 - Nov 2025</span>
+                    </div>
+                    <span class="subtitle" style="font-size: 1rem; margin-bottom: 1rem;">Suraj Palace | Bhopal, India</span>
+                    <ul class="experience-list">
+                        <li>Led product-led digital transformation initiatives across reservations, front office, F&B, and finance operations.</li>
+                        <li>Defined product requirements, KPIs, and analytics frameworks to support pricing, occupancy, and revenue optimization decisions.</li>
+                        <li>Designed executive-facing Power BI dashboards, enabling real-time visibility and contributing to 18% YoY profit growth.</li>
+                        <li>Identified and resolved 15+ operational/data bottlenecks, improving operational efficiency by 22%.</li>
+                        <li>Implemented automation/AI-assisted workflows for reconciliation and night audits, reducing manual effort by 40%.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <div class="role-header">
+                        <h3>Business Analyst</h3>
+                        <span class="duration">Apr 2022 - Sep 2023</span>
+                    </div>
+                    <span class="subtitle" style="font-size: 1rem; margin-bottom: 1rem;">CITI-US | Mumbai, India</span>
+                    <ul class="experience-list">
+                        <li>Managed requirements for three major US state digital transformation projects (CCWIS, CCMS, HHS), achieving 100% regulatory compliance.</li>
+                        <li>Delivered 80+ detailed user stories with high-fidelity mock-ups within 60 days, reducing rework by 35%.</li>
+                        <li>Created 25+ comprehensive process maps and AS-IS/TO-BE documentation, driving 20% faster regulatory approvals.</li>
+                        <li>Led JAD sessions, sprint ceremonies, and UAT sessions with US-based stakeholders.</li>
+                        <li>Authored technical proposals and RFPs, enabling successful acquisition of multiple new government projects.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Projects Grid -->
+            <section id="projects">
+                <h2>Key Projects</h2>
+                <div class="grid-container">
+                    
+                    <div class="project-card">
+                        <div>
+                            <h3>AI-Augmented Product Analytics Platform</h3>
+                            <p style="margin-top: 1rem; font-size: 0.95rem;">
+                                Architected an LLM-driven decision intelligence layer that interprets product KPIs from SQL metrics to generate risk flags and executive-ready actions.
+                            </p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">SQL</span>
+                            <span class="tag">LLMs</span>
+                            <span class="tag">Power BI</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <h3>Autonomous AI Business Analyst</h3>
+                            <p style="margin-top: 1rem; font-size: 0.95rem;">
+                                Engineered a reproducible ML pipeline with SHAP explainability to automate analysis and reporting, scaling analyst capacity for complex product decisions.
+                            </p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Multi-Agent System</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">XGBoost</span>
+                            <span class="tag">LangChain</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div>
+                            <h3>Digital Transformation @ CITI-US</h3>
+                            <p style="margin-top: 1rem; font-size: 0.95rem;">
+                                Managed end-to-end requirements for US state government projects, delivering high-fidelity mockups and achieving 99% defect resolution pre-UAT.
+                            </p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Azure DevOps</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">GovTech</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills">
+                <h2>Skills & Tools</h2>
+                <div class="skills-wrapper">
+                    <span class="skill-pill">Power BI (Advanced)</span>
+                    <span class="skill-pill">Tableau</span>
+                    <span class="skill-pill">Python (Advanced)</span>
+                    <span class="skill-pill">SQL (Advanced)</span>
+                    <span class="skill-pill">R</span>
+                    <span class="skill-pill">Excel</span>
+                    <span class="skill-pill">Jira & Azure DevOps</span>
+                    <span class="skill-pill">Visio</span>
+                    <span class="skill-pill">AI Automation (RAG)</span>
+                    <span class="skill-pill">Product Roadmapping</span>
+                    <span class="skill-pill">User Research</span>
+                    <span class="skill-pill">Agile/Scrum</span>
+                </div>
+                
+                <div style="margin-top: 4rem;">
+                    <h3>Certifications</h3>
+                    <ul style="list-style: none; margin-top: 1.5rem; color: var(--text-main);">
+                        <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                            <i class="fas fa-certificate" style="color: var(--accent-color); margin-right: 15px; font-size: 0.8rem;"></i> 
+                            Google Data Analytics (Coursera)
+                        </li>
+                        <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                            <i class="fas fa-certificate" style="color: var(--accent-color); margin-right: 15px; font-size: 0.8rem;"></i> 
+                            PL-300: Microsoft Power BI Data Analyst
+                        </li>
+                        <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                            <i class="fas fa-certificate" style="color: var(--accent-color); margin-right: 15px; font-size: 0.8rem;"></i> 
+                            CBAP Training (HRD)
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education">
+                <h2>Education</h2>
+                
+                <div class="education-item">
+                    <div class="role-header">
+                        <h3>MBA in Technology Management</h3>
+                        <span class="duration">July 2016 - May 2021</span>
+                    </div>
+                    <span class="subtitle" style="font-size: 1rem; margin-bottom: 0.5rem;">NMIMS | Mumbai, India</span>
+                    <p style="font-size: 0.95rem;">Major: Finance | Minor: Business Intelligence & Analytics | GPA: 3.42/4</p>
+                </div>
+
+                <div class="education-item">
+                    <div class="role-header">
+                        <h3>Bachelor of Technology</h3>
+                        <span class="duration">July 2016 - May 2021</span>
+                    </div>
+                    <span class="subtitle" style="font-size: 1rem; margin-bottom: 0.5rem;">NMIMS | Mumbai, India</span>
+                    <p style="font-size: 0.95rem;">Specialization: Electronics and Telecommunication | GPA: 3.21/4</p>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact">
+                <h2>Let's Connect</h2>
+                <div class="contact-info">
+                    <p>I am always open to discussing product strategies, analytics, and new opportunities.</p>
+                    <p style="margin-top: 2rem;">
+                        <i class="fas fa-envelope" style="margin-right: 15px; color: var(--accent-color);"></i> 
+                        <a href="mailto:sultansiddiqui123@gmail.com" class="contact-link">sultansiddiqui123@gmail.com</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-phone-alt" style="margin-right: 15px; color: var(--accent-color);"></i> 
+                        <a href="tel:+919214327604" class="contact-link">+91-9214327604</a>
+                    </p>
+                    <p>
+                        <i class="fab fa-linkedin-in" style="margin-right: 15px; color: var(--accent-color);"></i> 
+                        <a href="https://www.linkedin.com/in/mohammad-sultan-siddiqui-9326a21a8" class="contact-link">LinkedIn Portfolio</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Progress Bar Script
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("myBar").style.width = scrolled + "%";
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            if (window.innerWidth <= 900) {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
