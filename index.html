@@ -76,37 +76,31 @@
             background-color: var(--sidebar-bg);
             height: 100vh;
             position: fixed;
-            padding: 4rem 2.5rem; /* Increased padding for elegance */
+            padding: 4rem 2.5rem; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border-right: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
             z-index: 1000;
-            /* Added a subtle shadow for depth */
             box-shadow: 2px 0 20px rgba(0,0,0,0.02); 
         }
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 1.8rem; /* Slightly refined size */
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--heading-color);
             text-decoration: none;
             letter-spacing: -0.02em;
-            
-            /* Removed Boxed Style for a cleaner look */
             border: none;
             padding: 0;
             display: inline-block;
             transition: opacity 0.3s ease;
-            
-            /* Added an underline accent instead */
             border-bottom: 2px solid transparent;
         }
 
         .logo:hover {
-            /* Simpler hover effect */
             background-color: transparent;
             color: var(--heading-color);
             transform: none;
@@ -119,7 +113,7 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1.8rem; /* Increased gap */
+            gap: 1.8rem; 
         }
 
         .nav-menu li a {
@@ -136,7 +130,7 @@
         .nav-menu li a:hover {
             color: var(--heading-color);
             font-weight: 700;
-            transform: translateX(8px); /* Slide effect */
+            transform: translateX(8px); 
         }
 
         .nav-menu li a::before {
@@ -155,7 +149,6 @@
             height: 100%;
         }
 
-        /* Removed old underline effect in favor of side accent */
         .nav-menu li a::after {
             display: none;
         }
@@ -185,12 +178,12 @@
         /* --- MAIN CONTENT --- */
         .main-content {
             margin-left: 280px;
-            padding: 6rem 12%; /* More breathing room */
+            padding: 6rem 12%; 
             width: 100%;
         }
 
         section {
-            margin-bottom: 8rem; /* Increased vertical spacing */
+            margin-bottom: 8rem; 
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s forwards;
@@ -210,7 +203,7 @@
         }
 
         h1 {
-            font-size: 4rem; /* Larger Title */
+            font-size: 4rem; 
             line-height: 1.1;
             margin-bottom: 1.5rem;
         }
@@ -261,7 +254,6 @@
             position: relative;
         }
         
-        /* Decorative quote mark */
         .quote-block::before {
             content: '"';
             position: absolute;
@@ -284,14 +276,14 @@
         /* --- EXPERIENCE --- */
         .experience-item {
             margin-bottom: 4rem;
-            border-left: 1px solid rgba(0,0,0,0.1); /* Thinner line */
+            border-left: 1px solid rgba(0,0,0,0.1); 
             padding-left: 2rem;
             transition: all 0.3s;
         }
 
         .experience-item:hover {
             border-left-color: var(--heading-color);
-            padding-left: 2.5rem; /* Slide content slightly */
+            padding-left: 2.5rem; 
         }
 
         .role-header {
@@ -341,7 +333,7 @@
         .project-card {
             background: #fff;
             padding: 2.5rem;
-            border: 1px solid rgba(0,0,0,0.03); /* Very subtle border */
+            border: 1px solid rgba(0,0,0,0.03); 
             box-shadow: 0 5px 15px rgba(0,0,0,0.02);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             display: flex;
@@ -369,7 +361,7 @@
             color: var(--accent-color);
             border: 1px solid rgba(0,0,0,0.1);
             padding: 0.3rem 0.8rem;
-            border-radius: 2px; /* Sharper corners for modern look */
+            border-radius: 2px; 
             background: #FAFAFA;
         }
 
@@ -429,12 +421,12 @@
             border-bottom-color: transparent;
         }
 
-        /* --- MOBILE TOGGLE --- */
+        /* --- MOBILE TOGGLE & SLIDE IN --- */
         .menu-toggle {
             display: none;
             position: fixed;
             top: 20px;
-            right: 20px;
+            left: 20px; /* Moved to Top Left */
             z-index: 2000;
             background: var(--heading-color);
             color: #fff;
@@ -443,23 +435,72 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: opacity 0.3s, background 0.3s;
+        }
+
+        .menu-toggle:hover {
+            background-color: #444;
+        }
+
+        /* Close button inside sidebar */
+        .close-sidebar-btn {
+            display: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 2rem;
+            color: var(--heading-color);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-sidebar-btn:hover {
+            color: var(--highlight);
+        }
+
+        /* --- BACK TO TOP BUTTON --- */
+        #backToTop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-size: 1.2rem;
+            border: none;
+            outline: none;
+            background-color: var(--heading-color);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%; /* Circle shape */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #backToTop:hover {
+            background-color: #555;
+            transform: translateY(-3px);
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) { /* Increased breakpoint to 1024px */
             .sidebar {
                 transform: translateX(-100%);
                 width: 100%;
-                height: auto;
-                min-height: 100vh; /* Changed to min-height for scrolling */
+                max-width: 320px; 
+                height: 100vh;
+                min-height: 100vh; 
                 position: fixed;
                 top: 0;
                 left: 0;
                 border-bottom: none;
-                box-shadow: none;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.15);
                 padding: 6rem 2rem 2rem;
                 background-color: var(--sidebar-bg);
-                overflow-y: auto; /* Enable scrolling if menu is long */
+                overflow-y: auto; 
             }
 
             .sidebar.active {
@@ -476,6 +517,10 @@
                 display: block;
             }
 
+            .close-sidebar-btn {
+                display: block;
+            }
+
             h1 {
                 font-size: 3rem;
             }
@@ -489,14 +534,25 @@
         <div class="progress-bar" id="myBar"></div>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <button class="menu-toggle" onclick="toggleMenu()">
+    <!-- Mobile Menu Button (Hamburger) -->
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open Menu">
         <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" onclick="scrollToTop()" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
     </button>
 
     <div class="wrapper">
         <!-- Sidebar -->
         <nav class="sidebar" id="sidebar">
+            
+            <!-- Close Button for Mobile -->
+            <button class="close-sidebar-btn" onclick="toggleMenu()" aria-label="Close Menu">
+                &times;
+            </button>
+
             <div>
                 <!-- Brand Mark Logo -->
                 <a href="#" class="logo">Sultan Siddiqui.</a>
@@ -721,26 +777,64 @@
     </div>
 
     <script>
-        // Progress Bar Script
-        window.onscroll = function() {myFunction()};
+        // Progress Bar & Scroll Tracking
+        window.onscroll = function() {
+            progressFunction();
+            scrollFunction();
+        };
 
-        function myFunction() {
+        function progressFunction() {
             var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             var scrolled = (winScroll / height) * 100;
             document.getElementById("myBar").style.width = scrolled + "%";
         }
 
+        // Back to Top Logic
+        var mybutton = document.getElementById("backToTop");
+
+        function scrollFunction() {
+            // Show button after 100px scroll (lowered from 300px)
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         // Mobile Menu Toggle
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('menuToggle');
             sidebar.classList.toggle('active');
+            
+            // Hide hamburger when sidebar is active to prevent overlap
+            if (sidebar.classList.contains('active')) {
+                toggleBtn.style.opacity = '0';
+                toggleBtn.style.pointerEvents = 'none';
+            } else {
+                toggleBtn.style.opacity = '1';
+                toggleBtn.style.pointerEvents = 'auto';
+            }
         }
 
         function closeMenu() {
-            if (window.innerWidth <= 900) {
+            // Close menu only on mobile screens
+            if (window.innerWidth <= 1024) {
                 const sidebar = document.getElementById('sidebar');
+                const toggleBtn = document.getElementById('menuToggle');
                 sidebar.classList.remove('active');
+                
+                // Show hamburger again
+                toggleBtn.style.opacity = '1';
+                toggleBtn.style.pointerEvents = 'auto';
             }
         }
     </script>
